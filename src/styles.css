@@ -105,6 +105,7 @@ body {
 } */
 
 .app-container {
+  min-height: 100vh;
   padding: var(--space-300);
   background-color: var(--clr-rose-50);
 }
@@ -348,5 +349,22 @@ body {
 
   .category {
     margin-bottom: var(--space-600);
+  }
+}
+
+/* 1440px */
+@media (min-width: 90em) {
+  .app-container {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-400);
+    padding: var(--space-600) var(--space-1600) var(--space-1200);
+  }
+
+  .cart {
+    max-width: 38.4rem;
+    flex-shrink: 0;
+    flex-grow: 1;
+    align-self: flex-start;
   }
 }
