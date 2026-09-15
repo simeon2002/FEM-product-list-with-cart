@@ -122,6 +122,8 @@ body {
 
 .category__product-list {
   display: grid;
+  justify-items: center;
+  align-items: center;
   row-gap: var(--space-600);
 }
 
@@ -166,6 +168,7 @@ body {
 }
 
 .cart-item__title {
+  font-size: var(--fs-300);
   font-weight: var(--fw-semi-bold);
   margin-bottom: var(--space-100);
 }
@@ -293,3 +296,38 @@ body {
 /********************************************/
 /* UTILITY / HELPER CLASSES */
 /********************************************/
+
+/* QUERIES */
+/* 512 px */
+@media (min-width: 32em) {
+  .category {
+    margin-bottom: var(--space-1000);
+  }
+
+  .category-item {
+    width: 80%;
+  }
+
+  .cart-item__title,
+  .cart__total-container,
+  .btn {
+    font-size: var(--fs-400);
+  }
+
+  .category__product-list {
+    row-gap: 4rem;
+  }
+
+  .product__title,
+  .product__price {
+    font-size: var(--fs-500);
+  }
+
+  .product__sub-category {
+    font-size: var(--fs-400);
+  }
+
+  .cart {
+    padding: var(--space-600);
+  }
+}
