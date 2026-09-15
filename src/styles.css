@@ -9,27 +9,6 @@
 
   /*****  COLORS (primary, secondary, accents and greys) *****/
   --clr-white: #fff;
-  --clr-primary-800: #032303;
-  --clr-primary-700: #1b7e1b;
-  --clr-primary-600: #229822;
-  --clr-primary-500: #32cd32;
-  --clr-primary-400: #53d34f;
-  --clr-primary-300: #6cd867;
-  --clr-primary-200: #81de7c;
-  --clr-primary-100: hsl(116, 73%, 80%);
-  --clr-primary-800: #0d4e0d;
-  --clr-gray-900: hsl(120, 4%, 11%);
-  --clr-gray-700: hsl(120, 6%, 40%);
-  --clr-gray-600: hsl(120, 6%, 65%);
-  --clr-gray-500: hsl(120, 6%, 80%);
-  --clr-gray-400: hsl(120, 8%, 85%);
-  --clr-gray-300: hsl(120, 8%, 90%);
-  --clr-gray-200: hsl(120, 8%, 95%);
-  --clr-gray-150: hsl(0, 4%, 97%);
-  --clr-gray-100: hsl(0, 0%, 99%);
-  /* --clr-secondary: */
-  /* Add semantic colors later! */
-  --clr-red: red;
 
   /***** TYPOGRAPHY *****/
   /* font weights */
