@@ -309,8 +309,7 @@ body {
   }
 
   .cart-item__title,
-  .cart__total-container,
-  .btn {
+  .cart__total-container {
     font-size: var(--fs-400);
   }
 
@@ -329,5 +328,25 @@ body {
 
   .cart {
     padding: var(--space-600);
+  }
+}
+
+@media (min-width: 48em) {
+  .app-container {
+    padding: 4rem;
+  }
+
+  .category__product-list {
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: var(--space-300);
+    column-gap: var(--space-400);
+  }
+
+  .category-item {
+    width: 100%;
+  }
+
+  .category {
+    margin-bottom: var(--space-600);
   }
 }
