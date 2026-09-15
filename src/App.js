@@ -30,7 +30,11 @@ function ProductCard() {
     <li className="category-item">
       <article className="product product--selected">
         <div className="product__image-container">
-          <img src="./assets/images/image-waffle-mobile.jpg" alt="Waffle with berries" className="product__image" />
+          <picture>
+            <source srcSet="./assets/images/image-waffle-desktop.jpg" media="(min-width: 90em)" />
+            <source srcSet="./assets/images/image-waffle-tablet.jpg" media="(min-width: 48em)" />
+            <img src="./assets/images/image-waffle-mobile.jpg" alt="Waffle with berries" className="product__image" />
+          </picture>
           <Button className="btn--add-to-cart">Add to Cart</Button>
         </div>
         <div className="product__product-details">
