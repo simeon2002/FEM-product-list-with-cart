@@ -35,7 +35,9 @@ function ProductCard() {
             <source srcSet="./assets/images/image-waffle-tablet.jpg" media="(min-width: 48em)" />
             <img src="./assets/images/image-waffle-mobile.jpg" alt="Waffle with berries" className="product__image" />
           </picture>
-          <Button className="btn--add-to-cart">Add to Cart</Button>
+          <Button className="btn--add-to-cart">
+            <img src="./assets/images/icon-add-to-cart.svg" alt="" className="icon icon-add-to-cart" /> Add to Cart
+          </Button>
         </div>
         <div className="product__product-details">
           <span className="product__sub-category">Waffle</span>
@@ -63,8 +65,10 @@ function Cart() {
         <p className="cart__total">$46.50</p>
       </div>
       <div className="cart__carbon-message">
+        <img src="./assets/images/icon-carbon-neutral.svg" alt="" className="icon icon-tree" />
         <p>
-          🌲 This is a <strong>carbon-neutral</strong> delivery
+          {" "}
+          This is a <strong>carbon-neutral</strong> delivery
         </p>
       </div>
       <Button className="btn--primary">Confirm Order</Button>
@@ -94,7 +98,9 @@ function CartItem({ children }) {
         <span className="cart-item__price">@ $5.50</span>
         <span className="cart-item__price-total">@ $5.50</span>
       </div>
-      <Button className="btn--remove">❎</Button>
+      <Button className="btn--remove">
+        <img src="./assets/images/icon-remove-item.svg" alt="" className="icon icon-remove" />
+      </Button>
     </li>
   );
 }

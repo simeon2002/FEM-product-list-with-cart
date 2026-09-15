@@ -193,6 +193,16 @@ body {
   font-weight: var(--fw-semi-bold);
 }
 
+.icon-remove {
+  border-radius: 50%;
+  border: 1px solid var(--clr-red);
+  padding: 0.2rem;
+}
+
+.icon-remove:hover {
+  border: 1px solid var(--clr-black);
+}
+
 .cart__total-container {
   display: flex;
   align-items: center;
@@ -207,6 +217,9 @@ body {
 }
 
 .cart__carbon-message {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-100);
   background-color: var(--clr-rose-50);
   padding: var(--space-200);
   font-size: var(--fs-300);
@@ -257,6 +270,10 @@ body {
 .btn {
   background: none;
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-100);
   width: 16rem;
   font-size: var(--fs-300);
   font-weight: var(--fw-semi-bold);
