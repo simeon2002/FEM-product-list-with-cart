@@ -266,14 +266,25 @@ body {
   width: 100%;
 }
 
+.btn--primary:hover {
+  background: linear-gradient(rgb(0 0 0 / 25%), rgb(0 0 0 / 25%)), var(--clr-red);
+}
+
 .btn--add-to-cart {
+  --border-color: var(--clr-rose-400);
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
-  border: 1px solid var(--clr-rose-400);
+  border: 1px solid var(--border-color);
   background-color: var(--clr-white);
+  transition: all 0.3s;
+}
+
+.btn--add-to-cart:hover {
+  --border-color: var(--clr-red);
+  color: var(--clr-red);
 }
 
 .btn--remove {
