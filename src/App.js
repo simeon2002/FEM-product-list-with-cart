@@ -1,48 +1,49 @@
+import { useState } from "react";
 import products from "./data.json";
 
 export default function App() {
+  const productList = products;
+  const [cartItems, setCartItems] = useState([]);
+
   return (
     <main className="app-container">
-      <ProductCategory category="dessert" />
-      <Cart />
+      <ProductCategory category="dessert" productList={productList} />
+      <Cart cartItems={cartItems} />
     </main>
   );
 }
 
-function ProductCategory({ category }) {
+function ProductCategory({ category, productList }) {
   return (
     <section className="category">
       <h1 className="category__title">{category[0].toUpperCase() + category.slice(1)}</h1>
       <ul className="category__product-list">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {productList.map(product => (
+          <ProductCard product={product} />
+        ))}
       </ul>
     </section>
   );
 }
 
-function ProductCard() {
+function ProductCard({ product }) {
   return (
     <li className="category-item">
       <article className="product product--selected">
         <div className="product__image-container">
           <picture>
-            <source srcSet="./assets/images/image-waffle-desktop.jpg" media="(min-width: 90em)" />
-            <source srcSet="./assets/images/image-waffle-tablet.jpg" media="(min-width: 48em)" />
-            <img src="./assets/images/image-waffle-mobile.jpg" alt="Waffle with berries" className="product__image" />
+            <source srcSet={product.image.desktop} media="(min-width: 90em)" />
+            <source srcSet={product.image.tablet} media="(min-width: 48em)" />
+            <img src={product.image.mobile} alt="Waffle with berries" className="product__image" />
           </picture>
           <Button className="btn--add-to-cart">
             <img src="./assets/images/icon-add-to-cart.svg" alt="" className="icon icon-add-to-cart" /> Add to Cart
           </Button>
         </div>
         <div className="product__product-details">
-          <span className="product__sub-category">Waffle</span>
-          <h2 className="product__title">Waffle with Berries</h2>
-          <p className="product__price">$6.50</p>
+          <span className="product__sub-category">{product.category}</span>
+          <h2 className="product__title">{product.name}</h2>
+          <p className="product__price">${product.price}</p>
         </div>
       </article>
     </li>
@@ -55,30 +56,41 @@ function Button({ children, className = "" }) {
 
 function ItemCount() {}
 
-function Cart() {
+function Cart({ cartItems }) {
   return (
     <aside className="cart">
-      <h2 className="cart__title">Your Cart(7)</h2>
-      <CartList />
-      <div className="cart__total-container">
-        <p>Order Total</p>
-        <p className="cart__total">$46.50</p>
-      </div>
-      <div className="cart__carbon-message">
-        <img src="./assets/images/icon-carbon-neutral.svg" alt="" className="icon icon-tree" />
-        <p>
-          {" "}
-          This is a <strong>carbon-neutral</strong> delivery
-        </p>
-      </div>
-      <Button className="btn--primary">Confirm Order</Button>
+      <h2 className="cart__title">Your Cart (7)</h2>
+      {!cartItems.length && (
+        <div className="cart--empty">
+          <img src="./assets/images/illustration-empty-cart.svg" alt="Empty cart" />
+          <p>your added items will appear here</p>
+        </div>
+      )}
+
+      {!!cartItems.length && (
+        <>
+          <CartList cartItems={cartItems} />
+          <div className="cart__total-container">
+            <p>Order Total</p>
+            <p className="cart__total">$46.50</p>
+          </div>
+          <div className="cart__carbon-message">
+            <img src="./assets/images/icon-carbon-neutral.svg" alt="" className="icon icon-tree" />
+            <p>
+              This is a <strong>carbon-neutral</strong> delivery
+            </p>
+          </div>
+          <Button className="btn--primary">Confirm Order</Button>
+        </>
+      )}
     </aside>
   );
 }
 
-function CartList() {
+function CartList({ cartItems }) {
   return (
     <ul className="cart__items-list">
+      {cartItems.map}
       <CartItem>Classic Tiramisu</CartItem>
       <div className="cart__divider"></div>
       <CartItem>Classic Tiramisu</CartItem>
