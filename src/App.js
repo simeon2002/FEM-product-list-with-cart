@@ -53,11 +53,7 @@ function Cart() {
   return (
     <aside className="cart">
       <h2 className="cart__title">Your Cart(7)</h2>
-      <ul className="cart__items-list">
-        <CartItem>Classic Tiramisu</CartItem>
-        <CartItem>Classic Tiramisu</CartItem>
-        <CartItem>Classic Tiramisu</CartItem>
-      </ul>
+      <CartList />
       <div className="cart__total-container">
         <p>Order Total</p>
         <p className="cart__total">$46.50</p>
@@ -69,6 +65,19 @@ function Cart() {
       </div>
       <Button className="btn--primary">Confirm Order</Button>
     </aside>
+  );
+}
+
+function CartList() {
+  return (
+    <ul className="cart__items-list">
+      <CartItem>Classic Tiramisu</CartItem>
+      <div className="cart__divider"></div>
+      <CartItem>Classic Tiramisu</CartItem>
+      <div className="cart__divider"></div>
+      <CartItem>Classic Tiramisu</CartItem>
+      <div className="cart__divider"></div>
+    </ul>
   );
 }
 

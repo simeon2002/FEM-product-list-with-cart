@@ -95,6 +95,7 @@ body {
     "Helvetica Neue",
     sans-serif;
   font-size: var(--fs-400);
+  color: var(--clr-rose-900);
   line-height: 1.5;
 }
 
@@ -106,6 +107,10 @@ body {
 .app-container {
   padding: var(--space-300);
   background-color: var(--clr-rose-50);
+}
+
+.category {
+  margin-bottom: var(--space-400);
 }
 
 .category__title {
@@ -122,6 +127,90 @@ body {
 
 .category-item {
   list-style: none;
+}
+
+/* CART SECTION */
+.cart {
+  padding: var(--space-300);
+  background-color: var(--clr-white);
+}
+
+.cart__title {
+  font-size: var(--fs-700);
+  color: var(--clr-red);
+  margin-bottom: var(--space-300);
+}
+
+.cart__items-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+  list-style: none;
+  margin-bottom: var(--space-400);
+}
+
+.cart__divider {
+  height: 1px;
+  width: 100%;
+  background: var(--clr-rose-100);
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+}
+
+.cart-item__details {
+  margin-right: auto;
+  font-size: var(--fs-300);
+}
+
+.cart-item__title {
+  font-weight: var(--fw-semi-bold);
+  margin-bottom: var(--space-100);
+}
+
+.cart-item__count {
+  color: var(--clr-red);
+  font-weight: var(--fw-semi-bold);
+}
+
+.cart-item__count,
+.cart-item__price {
+  margin-right: var(--space-100);
+}
+
+.cart-item__price,
+.cart-item__price-total {
+  color: var(--clr-rose-500);
+}
+
+.cart-item__price-total {
+  font-weight: var(--fw-semi-bold);
+}
+
+.cart__total-container {
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-300);
+  margin-bottom: var(--space-300);
+}
+
+.cart__total {
+  font-size: var(--fs-700);
+  font-weight: var(--fw-bold);
+  margin-left: auto;
+}
+
+.cart__carbon-message {
+  background-color: var(--clr-rose-50);
+  padding: var(--space-200);
+  font-size: var(--fs-300);
+  margin-bottom: var(--space-300);
+}
+
+.cart__carbon-message strong {
+  font-weight: var(--fw-semi-bold);
 }
 
 /********************************************/
@@ -174,6 +263,7 @@ body {
 .btn--primary {
   background-color: var(--clr-red);
   color: var(--clr-white);
+  width: 100%;
 }
 
 .btn--add-to-cart {
@@ -184,6 +274,10 @@ body {
   z-index: 3;
   border: 1px solid var(--clr-rose-400);
   background-color: var(--clr-white);
+}
+
+.btn--remove {
+  width: auto;
 }
 /********************************************/
 /* UTILITY / HELPER CLASSES */
