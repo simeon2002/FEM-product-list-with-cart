@@ -1,0 +1,102 @@
+@import "modern-normalize";
+@import "reset.css";
+
+/********************************************/
+/* DESIGN SYSTEM */
+/********************************************/
+:root {
+  font-size: 62.5%; /* Start with 10px as default relative font size assuming default browser font size of 16px*/
+
+  /*****  COLORS (primary, secondary, accents and greys) *****/
+  --clr-white: #fff;
+  --clr-primary-800: #032303;
+  --clr-primary-700: #1b7e1b;
+  --clr-primary-600: #229822;
+  --clr-primary-500: #32cd32;
+  --clr-primary-400: #53d34f;
+  --clr-primary-300: #6cd867;
+  --clr-primary-200: #81de7c;
+  --clr-primary-100: hsl(116, 73%, 80%);
+  --clr-primary-800: #0d4e0d;
+  --clr-gray-900: hsl(120, 4%, 11%);
+  --clr-gray-700: hsl(120, 6%, 40%);
+  --clr-gray-600: hsl(120, 6%, 65%);
+  --clr-gray-500: hsl(120, 6%, 80%);
+  --clr-gray-400: hsl(120, 8%, 85%);
+  --clr-gray-300: hsl(120, 8%, 90%);
+  --clr-gray-200: hsl(120, 8%, 95%);
+  --clr-gray-150: hsl(0, 4%, 97%);
+  --clr-gray-100: hsl(0, 0%, 99%);
+  /* --clr-secondary: */
+  /* Add semantic colors later! */
+  --clr-red: red;
+
+  /***** TYPOGRAPHY *****/
+  /* font weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semi-bold: 600;
+  --fw-bold: 700;
+  --fw-extra-bold: 800;
+
+  /* - Font sizes (px) */
+  --fs-100: 1rem; /* 10px */
+  --fs-200: 1.2rem; /* 12px */
+  --fs-300: 1.4rem; /* 14px */
+  --fs-400: 1.6rem; /* 16px */
+  --fs-500: 1.8rem; /* 18px */
+  --fs-600: 2rem; /* 20px */
+  --fs-700: 2.4rem; /* 24px */
+  --fs-800: 3rem; /* 30px */
+  --fs-900: 3.6rem; /* 36px */
+  --fs-1000: 4.4rem; /* 44px */
+  --fs-1100: 5.2rem; /* 52px */
+  --fs-1200: 6.2rem; /* 62px */
+  --fs-1300: 7.4rem; /* 74px */
+  --fs-1400: 8.6rem; /* 86px */
+  --fs-1500: 9.8rem; /* 98px */
+
+  /* semantic font names */
+  --fs-caption: var(--fs-200);
+  --fs-text-prim: var(--fs-400);
+  --fs-icon-md: var(--fs-500);
+  --fs-icon-sm: var(--fs-300);
+  --fs-text-sec: var(--fs-300);
+  --fs-heading-prim: var(--fs-800);
+  --fs-heading-sec: var(--fs-600);
+  --fs-heading-tert: var(--fs-500);
+
+  /* letter spacing */
+  /* line heights */
+
+  /***** WHITESPACE *****/
+  /* spacing system */
+  --space-25: 0.2rem;
+  --space-50: 0.4rem;
+  --space-100: 0.8rem;
+  --space-140: 1.2rem;
+  --space-200: 1.6rem;
+  --space-300: 2.4rem;
+  --space-400: 3.2rem;
+  --space-600: 4.8rem;
+  --space-800: 6.4rem;
+  --space-1000: 8rem;
+  --space-1200: 9.6rem;
+  --space-1600: 12.8rem;
+
+  /***** SHADOWS *****/
+
+  /***** BORDER RADIUS *****/
+}
+
+/********************************************/
+/* SPECIFIC STYLES */
+/********************************************/
+
+/********************************************/
+/* REUSABLE COMPONENTS */
+/********************************************/
+
+/********************************************/
+/* UTILITY / HELPER CLASSES */
+/********************************************/
