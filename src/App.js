@@ -30,6 +30,10 @@ export default function App() {
     setCartItems(items => items.map(item => (item.name === curItem.name ? { ...item, count: item.count-- } : item)));
   }
 
+  function handleRemoveItem(itemToRemove) {
+    setCartItems(items => items.filter(item => item.name !== itemToRemove.name));
+  }
+
   return (
     <main className="app-container">
       <ProductCategory
@@ -40,7 +44,7 @@ export default function App() {
         onIncrementCount={handleIncrementCount}
         onDecrementCount={handleDecrementCount}
       />
-      <Cart cartItems={cartItems} />
+      <Cart cartItems={cartItems} onRemoveItem={handleRemoveItem} />
     </main>
   );
 }
@@ -66,11 +70,10 @@ function ProductCategory({ category, productList, cartItems, onAddItem, onIncrem
 }
 
 function ProductCard({ product, cartItems, onAddItem, onDecrementCount, onIncrementCount }) {
-  const [isSelected, setIsSelected] = useState(false);
+  const isSelected = cartItems.some(item => item.name === product.name);
 
   function handleClick() {
     onAddItem(product);
-    setIsSelected(true);
   }
 
   return (
@@ -113,6 +116,8 @@ function Button({ children, className = "", onClick = () => {} }) {
 
 function ItemCount({ cartItems, product, onIncrementCount, onDecrementCount }) {
   const item = cartItems.find(item => item.name === product.name);
+  console.log(item);
+
   const itemCount = item.count;
 
   return (
@@ -127,7 +132,7 @@ function ItemCount({ cartItems, product, onIncrementCount, onDecrementCount }) {
     </div>
   );
 }
-function Cart({ cartItems }) {
+function Cart({ cartItems, onRemoveItem }) {
   const isCartEmpty = !cartItems.length;
   const cartItemsCount = cartItems.reduce((count, item) => count + item.count, 0);
   const cartTotal = cartItems.reduce((total, item) => total + item.price * item.count, 0);
@@ -144,7 +149,7 @@ function Cart({ cartItems }) {
 
       {!isCartEmpty && (
         <>
-          <CartList cartItems={cartItems} />
+          <CartList cartItems={cartItems} onRemoveItem={onRemoveItem} />
           <div className="cart__total-container">
             <p>Order Total</p>
             <p className="cart__total">${cartTotal}</p>
@@ -162,12 +167,14 @@ function Cart({ cartItems }) {
   );
 }
 
-function CartList({ cartItems }) {
+function CartList({ cartItems, onRemoveItem }) {
   return (
     <ul className="cart__items-list">
       {cartItems.map(item => (
         <React.Fragment key={item.name}>
-          <CartItem item={item}>{item.name}</CartItem>
+          <CartItem item={item} onRemoveItem={onRemoveItem}>
+            {item.name}
+          </CartItem>
           <div className="cart__divider"></div>
         </React.Fragment>
       ))}
@@ -175,7 +182,7 @@ function CartList({ cartItems }) {
   );
 }
 
-function CartItem({ item, children }) {
+function CartItem({ item, children, onRemoveItem }) {
   const itemTotal = item.count * item.price;
 
   return (
@@ -186,7 +193,7 @@ function CartItem({ item, children }) {
         <span className="cart-item__price">@ ${item.price}</span>
         <span className="cart-item__price-total">@ ${itemTotal}</span>
       </div>
-      <Button className="btn--remove">
+      <Button className="btn--remove" onClick={() => onRemoveItem(item)}>
         <img src="./assets/images/icon-remove-item.svg" alt="" className="icon icon-remove" />
       </Button>
     </li>
