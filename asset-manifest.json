@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/FEM-product-list-with-cart/static/css/main.63b29ff1.css",
+    "main.js": "/FEM-product-list-with-cart/static/js/main.1392d9f9.js",
+    "index.html": "/FEM-product-list-with-cart/index.html",
+    "main.63b29ff1.css.map": "/FEM-product-list-with-cart/static/css/main.63b29ff1.css.map",
+    "main.1392d9f9.js.map": "/FEM-product-list-with-cart/static/js/main.1392d9f9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.63b29ff1.css",
+    "static/js/main.1392d9f9.js"
+  ]
+}
