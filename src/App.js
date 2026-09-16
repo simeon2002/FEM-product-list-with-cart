@@ -7,9 +7,6 @@ export default function App() {
   const [hasPlacedOrder, setHasPlacedOrder] = useState(false);
 
   function handleAddItem(item) {
-    console.log(item);
-    console.log(cartItems);
-
     const getItemIdx = (items, itemToFind) => items.findIndex(item => item.name === itemToFind.name);
 
     setCartItems(cartItems => {
@@ -17,18 +14,16 @@ export default function App() {
 
       if (itemIdx === -1) return [...cartItems, { ...item, count: 1 }];
 
-      return cartItems.map(cartItem => (cartItem.name === item.name ? { ...cartItem, count: cartItem.count++ } : cartItem));
+      return cartItems.map(cartItem => (cartItem.name === item.name ? { ...cartItem, count: cartItem.count + 1 } : cartItem));
     });
   }
 
   function handleIncrementCount(curItem) {
-    console.log(curItem);
-
-    setCartItems(items => items.map(item => (item.name === curItem.name ? { ...item, count: item.count++ } : item)));
+    setCartItems(items => items.map(item => (item.name === curItem.name ? { ...item, count: item.count + 1 } : item)));
   }
 
   function handleDecrementCount(curItem) {
-    setCartItems(items => items.map(item => (item.name === curItem.name ? { ...item, count: item.count-- } : item)));
+    setCartItems(items => items.map(item => (item.name === curItem.name ? { ...item, count: item.count - 1 } : item)));
   }
 
   function handleRemoveItem(itemToRemove) {
@@ -64,7 +59,6 @@ export default function App() {
           <OrderConfirmedModal cartItems={cartItems} onReset={handleReset} />
         </>
       )}
-      ;
     </>
   );
 }
@@ -136,7 +130,6 @@ function Button({ children, className = "", onClick = () => {} }) {
 
 function ItemCount({ cartItems, product, onIncrementCount, onDecrementCount }) {
   const item = cartItems.find(item => item.name === product.name);
-  console.log(item);
 
   const itemCount = item.count;
 
@@ -253,10 +246,10 @@ function OrderList({ cartItems }) {
   return (
     <ul className="order-list">
       {cartItems.map(item => (
-        <>
-          <OrderItem cartItem={item} key={item.name} />
+        <React.Fragment key={item.name}>
+          <OrderItem cartItem={item} />
           <div className="divider"></div>
-        </>
+        </React.Fragment>
       ))}
     </ul>
   );
