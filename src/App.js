@@ -20,41 +20,78 @@ export default function App() {
     });
   }
 
+  function handleIncrementCount(curItem) {
+    console.log(curItem);
+
+    setCartItems(items => items.map(item => (item.name === curItem.name ? { ...item, count: item.count++ } : item)));
+  }
+
+  function handleDecrementCount(curItem) {
+    setCartItems(items => items.map(item => (item.name === curItem.name ? { ...item, count: item.count++ } : item)));
+  }
+
   return (
     <main className="app-container">
-      <ProductCategory category="dessert" productList={productList} onAddItem={handleAddItem} />
+      <ProductCategory
+        category="dessert"
+        productList={productList}
+        cartItems={cartItems}
+        onAddItem={handleAddItem}
+        onIncrementCount={handleIncrementCount}
+        onDecrementCount={handleDecrementCount}
+      />
       <Cart cartItems={cartItems} />
     </main>
   );
 }
 
-function ProductCategory({ category, productList, onAddItem }) {
+function ProductCategory({ category, productList, cartItems, onAddItem, onIncrementCount, onDecrementCount }) {
   return (
     <section className="category">
       <h1 className="category__title">{category[0].toUpperCase() + category.slice(1)}</h1>
       <ul className="category__product-list">
         {productList.map(product => (
-          <ProductCard product={product} onAddItem={onAddItem} key={product.name} />
+          <ProductCard
+            product={product}
+            cartItems={cartItems}
+            onAddItem={onAddItem}
+            onIncrementCount={onIncrementCount}
+            onDecrementCount={onDecrementCount}
+            key={product.name}
+          />
         ))}
       </ul>
     </section>
   );
 }
 
-function ProductCard({ product, onAddItem }) {
+function ProductCard({ product, cartItems, onAddItem, onDecrementCount, onIncrementCount }) {
+  const [isSelected, setIsSelected] = useState(false);
+
+  function handleClick() {
+    onAddItem(product);
+    setIsSelected(true);
+  }
+
   return (
     <li className="category-item">
-      <article className="product product--selected">
+      <article className={`product ${isSelected ? "product--selected" : ""}`}>
         <div className="product__image-container">
           <picture>
             <source srcSet={product.image.desktop} media="(min-width: 90em)" />
             <source srcSet={product.image.tablet} media="(min-width: 48em)" />
             <img src={product.image.mobile} alt="Waffle with berries" className="product__image" />
           </picture>
-          <Button className="btn--add-to-cart" onClick={() => onAddItem(product)}>
-            <img src="./assets/images/icon-add-to-cart.svg" alt="" className="icon icon-add-to-cart" />
-            Add to Cart
-          </Button>
+
+          {isSelected ? (
+            <ItemCount cartItems={cartItems} product={product} onIncrementCount={onIncrementCount} onDecrementCount={onDecrementCount} />
+          ) : (
+            <Button className="btn--add-to-cart" onClick={handleClick}>
+              {" "}
+              <img src="./assets/images/icon-add-to-cart.svg" alt="" className="icon icon-add-to-cart" />
+              "Add to Cart"
+            </Button>
+          )}
         </div>
         <div className="product__product-details">
           <span className="product__sub-category">{product.category}</span>
@@ -74,20 +111,36 @@ function Button({ children, className = "", onClick = () => {} }) {
   );
 }
 
-function ItemCount() {}
+function ItemCount({ cartItems, product, onIncrementCount, onDecrementCount }) {
+  const item = cartItems.find(item => item.name === product.name);
+  const itemCount = item.count;
 
+  return (
+    <div className="product__item-count">
+      <Button className="btn btn--decrement" onClick={() => onDecrementCount(item)}>
+        <img src="./assets/images/icon-decrement-quantity.svg" alt="" />
+      </Button>
+      <span>{itemCount}</span>
+      <Button className="btn btn--increment" onClick={() => onIncrementCount(item)}>
+        <img src="./assets/images/icon-increment-quantity.svg" alt="" />
+      </Button>
+    </div>
+  );
+}
 function Cart({ cartItems }) {
+  const isCartEmpty = !cartItems.length;
+
   return (
     <aside className="cart">
       <h2 className="cart__title">Your Cart (7)</h2>
-      {!cartItems.length && (
+      {isCartEmpty && (
         <div className="cart--empty">
           <img src="./assets/images/illustration-empty-cart.svg" alt="Empty cart" />
           <p>your added items will appear here</p>
         </div>
       )}
 
-      {!!cartItems.length && (
+      {!isCartEmpty && (
         <>
           <CartList cartItems={cartItems} />
           <div className="cart__total-container">
