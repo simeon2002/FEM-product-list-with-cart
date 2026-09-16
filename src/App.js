@@ -40,6 +40,11 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  function handleReset() {
+    setHasPlacedOrder(false);
+    setCartItems([]);
+  }
+
   return (
     <>
       <main className="app-container">
@@ -56,7 +61,7 @@ export default function App() {
       {hasPlacedOrder && (
         <>
           <div className="modal-overlay"></div>
-          <OrderConfirmedModal cartItems={cartItems} />
+          <OrderConfirmedModal cartItems={cartItems} onReset={handleReset} />
         </>
       )}
       ;
@@ -224,7 +229,7 @@ function CartItem({ item, children, onRemoveItem }) {
   );
 }
 
-function OrderConfirmedModal({ cartItems }) {
+function OrderConfirmedModal({ cartItems, onReset }) {
   return (
     <div className="modal">
       <img src="./assets/images/icon-order-confirmed.svg" alt="" className="icon icon-order-confirmed" />
@@ -237,7 +242,9 @@ function OrderConfirmedModal({ cartItems }) {
           <OrderTotal cartItems={cartItems} />
         </div>
       </div>
-      <Button className="btn--primary">Start New Order</Button>
+      <Button className="btn--primary" onClick={onReset}>
+        Start New Order
+      </Button>
     </div>
   );
 }
