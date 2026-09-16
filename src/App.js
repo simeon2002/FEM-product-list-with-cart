@@ -27,7 +27,7 @@ export default function App() {
   }
 
   function handleDecrementCount(curItem) {
-    setCartItems(items => items.map(item => (item.name === curItem.name ? { ...item, count: item.count++ } : item)));
+    setCartItems(items => items.map(item => (item.name === curItem.name ? { ...item, count: item.count-- } : item)));
   }
 
   return (
@@ -89,7 +89,7 @@ function ProductCard({ product, cartItems, onAddItem, onDecrementCount, onIncrem
             <Button className="btn--add-to-cart" onClick={handleClick}>
               {" "}
               <img src="./assets/images/icon-add-to-cart.svg" alt="" className="icon icon-add-to-cart" />
-              "Add to Cart"
+              Add to Cart
             </Button>
           )}
         </div>
@@ -129,10 +129,12 @@ function ItemCount({ cartItems, product, onIncrementCount, onDecrementCount }) {
 }
 function Cart({ cartItems }) {
   const isCartEmpty = !cartItems.length;
+  const cartItemsCount = cartItems.reduce((count, item) => count + item.count, 0);
+  const cartTotal = cartItems.reduce((total, item) => total + item.price * item.count, 0);
 
   return (
     <aside className="cart">
-      <h2 className="cart__title">Your Cart (7)</h2>
+      <h2 className="cart__title">Your Cart ({cartItemsCount})</h2>
       {isCartEmpty && (
         <div className="cart--empty">
           <img src="./assets/images/illustration-empty-cart.svg" alt="Empty cart" />
@@ -145,7 +147,7 @@ function Cart({ cartItems }) {
           <CartList cartItems={cartItems} />
           <div className="cart__total-container">
             <p>Order Total</p>
-            <p className="cart__total">$46.50</p>
+            <p className="cart__total">${cartTotal}</p>
           </div>
           <div className="cart__carbon-message">
             <img src="./assets/images/icon-carbon-neutral.svg" alt="" className="icon icon-tree" />
