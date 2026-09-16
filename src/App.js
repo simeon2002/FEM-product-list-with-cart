@@ -4,6 +4,7 @@ import products from "./data.json";
 export default function App() {
   const productList = products;
   const [cartItems, setCartItems] = useState([]);
+  const [hasPlacedOrder, setHasPlacedOrder] = useState(false);
 
   function handleAddItem(item) {
     console.log(item);
@@ -34,19 +35,31 @@ export default function App() {
     setCartItems(items => items.filter(item => item.name !== itemToRemove.name));
   }
 
-  return (
-    <main className="app-container">
-      <ProductCategory
-        category="dessert"
-        productList={productList}
-        cartItems={cartItems}
-        onAddItem={handleAddItem}
-        onIncrementCount={handleIncrementCount}
-        onDecrementCount={handleDecrementCount}
-      />
-      <Cart cartItems={cartItems} onRemoveItem={handleRemoveItem} />
-    </main>
-  );
+  function handleOrderPlaced() {
+    setHasPlacedOrder(true);
+  }
+
+  if (hasPlacedOrder)
+    return (
+      <main className="app-container">
+        <OrderConfirmedModal cartItems={cartItems} />
+      </main>
+    );
+
+  if (!hasPlacedOrder)
+    return (
+      <main className="app-container">
+        <ProductCategory
+          category="dessert"
+          productList={productList}
+          cartItems={cartItems}
+          onAddItem={handleAddItem}
+          onIncrementCount={handleIncrementCount}
+          onDecrementCount={handleDecrementCount}
+        />
+        <Cart cartItems={cartItems} onRemoveItem={handleRemoveItem} onOrderPlaced={handleOrderPlaced} />
+      </main>
+    );
 }
 
 function ProductCategory({ category, productList, cartItems, onAddItem, onIncrementCount, onDecrementCount }) {
@@ -132,10 +145,9 @@ function ItemCount({ cartItems, product, onIncrementCount, onDecrementCount }) {
     </div>
   );
 }
-function Cart({ cartItems, onRemoveItem }) {
+function Cart({ cartItems, onRemoveItem, onOrderPlaced }) {
   const isCartEmpty = !cartItems.length;
   const cartItemsCount = cartItems.reduce((count, item) => count + item.count, 0);
-  const cartTotal = cartItems.reduce((total, item) => total + item.price * item.count, 0);
 
   return (
     <aside className="cart">
@@ -150,20 +162,30 @@ function Cart({ cartItems, onRemoveItem }) {
       {!isCartEmpty && (
         <>
           <CartList cartItems={cartItems} onRemoveItem={onRemoveItem} />
-          <div className="cart__total-container">
-            <p>Order Total</p>
-            <p className="cart__total">${cartTotal}</p>
-          </div>
+          <OrderTotal cartItems={cartItems} />
           <div className="cart__carbon-message">
             <img src="./assets/images/icon-carbon-neutral.svg" alt="" className="icon icon-tree" />
             <p>
               This is a <strong>carbon-neutral</strong> delivery
             </p>
           </div>
-          <Button className="btn--primary">Confirm Order</Button>
+          <Button className="btn--primary" onClick={onOrderPlaced}>
+            Confirm Order
+          </Button>
         </>
       )}
     </aside>
+  );
+}
+
+function OrderTotal({ cartItems }) {
+  const cartTotal = cartItems.reduce((total, item) => total + item.price * item.count, 0);
+
+  return (
+    <div className="cart__total-container">
+      <p>Order Total</p>
+      <p className="cart__total">${cartTotal}</p>
+    </div>
   );
 }
 
@@ -200,6 +222,42 @@ function CartItem({ item, children, onRemoveItem }) {
   );
 }
 
-function OrderConfirmedModal() {
-  return;
+function OrderConfirmedModal({ cartItems }) {
+  return (
+    <div className="modal">
+      <img src="./assets/images/icon-order-confirmed.svg" alt="" className="icon icon-order-confirmed" />
+      <h1 className="modal__title">Order Confirmed</h1>
+      <p className="modal__caption">We hope you enjoy your food!</p>
+      <OrderList cartItems={cartItems} />
+      <OrderTotal cartItems={cartItems} />
+    </div>
+  );
+}
+
+function OrderList({ cartItems }) {
+  return (
+    <ul className="order-list">
+      {cartItems.map(item => (
+        <OrderItem cartItem={item} key={item.name} />
+      ))}
+    </ul>
+  );
+}
+
+function OrderItem({ cartItem }) {
+  const itemTotal = cartItem.count * cartItem.price;
+
+  return (
+    <li className="order-item">
+      <img src={cartItem.image.thumbnail} alt={cartItem.name} className="order-item__image" />
+      <div className="order-item__details">
+        <h2 className="order-item__title">{cartItem.name}</h2>
+        <div className="order-item__count-details">
+          <span className="order-item__count">{cartItem.count}x</span>
+          <span className="order-item__item-price">@ ${cartItem.price}</span>
+        </div>
+        <span className="order-item__item-total">${itemTotal}</span>
+      </div>
+    </li>
+  );
 }
