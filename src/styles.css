@@ -167,7 +167,8 @@ body {
   margin-bottom: var(--space-400);
 }
 
-.cart__divider {
+.cart__divider,
+.divider {
   height: 1px;
   width: 100%;
   background: var(--clr-rose-100);
@@ -243,6 +244,117 @@ body {
 
 .cart__carbon-message strong {
   font-weight: var(--fw-semi-bold);
+}
+
+/* ORDER CONFIRMATION MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  height: 100rem;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  background-color: var(--clr-white);
+  width: 100%;
+  /* height: 85%; */
+  padding: 4rem var(--space-300) var(--space-300);
+  border-radius: 1.2rem 1.2rem 0 0;
+}
+
+body:has(.modal) {
+  overflow: hidden;
+}
+
+.icon-order-confirmed {
+  margin-bottom: var(--space-300);
+}
+
+.modal__title {
+  font-size: var(--fs-900);
+  line-height: 1.2;
+  margin-bottom: var(--space-100);
+}
+
+.modal__caption {
+  font-size: var(--fs-400);
+  color: var(--clr-rose-500);
+  margin-bottom: var(--space-400);
+}
+
+.order-information-container {
+  padding: 0 --space-300;
+  margin-bottom: var(--space-400);
+}
+
+.order-information {
+  padding: var(--space-300);
+  background-color: var(--clr-rose-50);
+}
+
+.order-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-200);
+}
+
+.order-item__image {
+  width: 4.8rem;
+  height: 4.8rem;
+}
+
+.order-item__desc-container {
+  display: flex;
+  flex: 1;
+}
+
+.order-item__details {
+  margin-right: auto;
+}
+
+.order-item__title {
+  font-size: var(--fs-300);
+  font-weight: var(--fw-semi-bold);
+}
+
+.order-item__count {
+  color: var(--clr-red);
+  font-size: var(--fs-300);
+  font-weight: var(--fw-semi-bold);
+  margin-right: var(--space-100);
+}
+
+.order-item__item-price {
+  color: var(--clr-rose-500);
+  font-size: var(--fs-300);
+}
+
+.order-item__item-total {
+  font-weight: var(--fw-semi-bold);
+}
+
+.divider:last-of-type {
+  display: none;
+}
+
+.total-divider {
+  margin-block: var(--space-300);
+}
+
+.modal .cart__total-container {
+  margin-bottom: 0;
 }
 
 /********************************************/

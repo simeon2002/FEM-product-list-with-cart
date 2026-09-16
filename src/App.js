@@ -37,17 +37,11 @@ export default function App() {
 
   function handleOrderPlaced() {
     setHasPlacedOrder(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  if (hasPlacedOrder)
-    return (
-      <main className="app-container">
-        <OrderConfirmedModal cartItems={cartItems} />
-      </main>
-    );
-
-  if (!hasPlacedOrder)
-    return (
+  return (
+    <>
       <main className="app-container">
         <ProductCategory
           category="dessert"
@@ -59,7 +53,15 @@ export default function App() {
         />
         <Cart cartItems={cartItems} onRemoveItem={handleRemoveItem} onOrderPlaced={handleOrderPlaced} />
       </main>
-    );
+      {hasPlacedOrder && (
+        <>
+          <div className="modal-overlay"></div>
+          <OrderConfirmedModal cartItems={cartItems} />
+        </>
+      )}
+      ;
+    </>
+  );
 }
 
 function ProductCategory({ category, productList, cartItems, onAddItem, onIncrementCount, onDecrementCount }) {
@@ -228,8 +230,14 @@ function OrderConfirmedModal({ cartItems }) {
       <img src="./assets/images/icon-order-confirmed.svg" alt="" className="icon icon-order-confirmed" />
       <h1 className="modal__title">Order Confirmed</h1>
       <p className="modal__caption">We hope you enjoy your food!</p>
-      <OrderList cartItems={cartItems} />
-      <OrderTotal cartItems={cartItems} />
+      <div className="order-information-container">
+        <div className="order-information">
+          <OrderList cartItems={cartItems} />
+          <div className="total-divider divider"></div>
+          <OrderTotal cartItems={cartItems} />
+        </div>
+      </div>
+      <Button className="btn--primary">Start New Order</Button>
     </div>
   );
 }
@@ -238,7 +246,10 @@ function OrderList({ cartItems }) {
   return (
     <ul className="order-list">
       {cartItems.map(item => (
-        <OrderItem cartItem={item} key={item.name} />
+        <>
+          <OrderItem cartItem={item} key={item.name} />
+          <div className="divider"></div>
+        </>
       ))}
     </ul>
   );
@@ -250,9 +261,9 @@ function OrderItem({ cartItem }) {
   return (
     <li className="order-item">
       <img src={cartItem.image.thumbnail} alt={cartItem.name} className="order-item__image" />
-      <div className="order-item__details">
-        <h2 className="order-item__title">{cartItem.name}</h2>
-        <div className="order-item__count-details">
+      <div className="order-item__desc-container">
+        <div className="order-item__details">
+          <h2 className="order-item__title">{cartItem.name}</h2>
           <span className="order-item__count">{cartItem.count}x</span>
           <span className="order-item__item-price">@ ${cartItem.price}</span>
         </div>
